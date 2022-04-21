@@ -11,6 +11,7 @@ import {
 	FormGroup,
 	IconButton,
 	Input,
+	InputAdornment,
 	InputLabel,
 	OutlinedInput,
 	Typography,
@@ -66,29 +67,33 @@ function Login() {
 			type={showPassword ? 'text' : 'password'}
 			inputRef={passwordRef}
 			endAdornment={
-				<IconButton
-					aria-label='toggle password visibility'
-					onClick={() => setShowPassword(!showPassword)}
-					onMouseDown={() => setShowPassword(!showPassword)}
-					edge='end'
-				>
-					{showPassword ? <Visibility /> : <VisibilityOff />}
-				</IconButton>
+				<InputAdornment position='end'>
+					<IconButton
+						aria-label='toggle password visibility'
+						onClick={() => setShowPassword(!showPassword)}
+						onMouseDown={() => setShowPassword(!showPassword)}
+						edge='end'
+					>
+						{showPassword ? <Visibility /> : <VisibilityOff />}
+					</IconButton>
+				</InputAdornment>
 			}
-		></OutlinedInput>
+		/>
 	);
 	return (
-		<section>
-			<Container>
-				<Card>
+		<section style={{ marginTop: '2em' }}>
+			<Container maxWidth='md'>
+				<Card sx={{ boxShadow: 1, maxWidth: 'md' }}>
 					<CardContent>
-						<Container>
-							<Typography>Login</Typography>
+						<Container maxWidth='sm'>
+							<Typography variant='h2' color='text.primary' gutterBottom>
+								Login
+							</Typography>
 							{errors.length > 0 ? (
 								<Alert severity='error' aria-live='assertive'>
-									{errors.map((error, index) => (
-										<p key={index}>{error}</p>
-									))}
+									{errors.map((error, index) => {
+										return <p key={`alert-${index}`}>{error}</p>;
+									})}
 								</Alert>
 							) : (
 								<></>
@@ -105,9 +110,9 @@ function Login() {
 								<FormGroup row={true} id='password-group' sx={{ marginTop: '1em' }}>
 									<FormControl fullWidth>
 										<InputLabel required htmlFor='password' id='password-label'>
-											{passwordInput}
+											Password
 										</InputLabel>
-										<Input id='password' type='password' inputRef={passwordRef} />
+										{passwordInput}
 									</FormControl>
 								</FormGroup>
 								<FormGroup row={true} id='submit-group' sx={{ marginTop: '1em' }}>
@@ -126,6 +131,7 @@ function Login() {
 							<Typography variant='body2' color='text.secondary' align='center'>
 								<Link to='/forgot-password'>Forgot Password?</Link>
 							</Typography>
+							<Link to='/signup'>Create an Account!</Link>
 						</Box>
 					</CardActions>
 				</Card>
