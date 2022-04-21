@@ -2,8 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
 import PersistLogin from './components/sessions/PersistLogin';
+import Logout from './components/sessions/Logout';
 import PrivateRoute from './components/routes/PrivateRoute';
+import PublicOnlyRoute from './components/routes/PublicOnlyRoute';
 import Dashboard from './components/dashboard/Dashboard';
+import Login from './components/sessions/Login';
 
 function App() {
 	return (
@@ -21,6 +24,22 @@ function App() {
 									<PrivateRoute>
 										<Dashboard />
 									</PrivateRoute>
+								}
+							/>
+							<Route
+								path='/logout'
+								element={
+									<PrivateRoute>
+										<Logout />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path='/login'
+								element={
+									<PublicOnlyRoute>
+										<Login />
+									</PublicOnlyRoute>
 								}
 							/>
 						</Route>
